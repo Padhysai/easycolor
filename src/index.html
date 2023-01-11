@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Easy Colors</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="./styles/main.css">
+    <script src="./js/index.js" type="module" defer></script>
+</head>
+
+<body class="font-inter bg-white">
+    <header class="mx-4 md:mx-16 xl:mx-32 my-6">
+        <nav class="flex gap-4 justify-center xl:justify-between">
+            <img class="w-28" src="./assets/logo.png" alt="Easy Colors">
+            <div class="gap-3 items-center hidden xl:flex">
+                <a class="text-primary font-semibold rounded-lg hover:bg-hover100 py-2 px-4 border-2 border-slate-300 shadow-sm"
+                    href="">Community</a>
+                <a class="bg-primary text-white font-semibold py-2 px-3 rounded-lg hover:bg-hover900 shadow-sm"
+                    href="">Submit a color</a>
+            </div>
+        </nav>
+    </header>
+    <hr class="shadow-md">
+    <main class="max-w-screen-xl mx-auto py-4">
+        <section class="py-32">
+            Color Picker
+        </section>
+        <section class="py-8">
+            <div class="flex flex-col items-center gap-2">
+                <svg width="66" height="66" viewBox="0 0 66 66" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="5" y="5" width="56" height="56" rx="28" fill="#F4EBFF" />
+                    <path d="M34.1667 21.3334L22.5 35.3334H33L31.8333 44.6667L43.5 30.6667H33L34.1667 21.3334Z"
+                        stroke="#7F56D9" stroke-width="2.33333" stroke-linecap="round" stroke-linejoin="round" />
+                    <rect x="5" y="5" width="56" height="56" rx="28" stroke="#F9F5FF" stroke-width="10" />
+                </svg>
+                <h2 class="text-2xl font-semibold text-primary">My Favorites</h2>
+            </div>
+            <div id="recent-copied-colors"
+                class="container mx-auto py-16 grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-8 place-items-center gap-x-6 gap-y-10">
+                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between">
+                    <div class="bg-slate-700 w-full h-32 rounded-t-lg"></div>
+                    <button class="py-4 text-slate-700/50 font-semibold">#FFFFFF</button>
+                </div>
+                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between">
+                    <div class="bg-red-700 w-full h-32 rounded-t-lg"></div>
+                    <button class="py-4 text-slate-700/50 font-semibold">#FFFFFF</button>
+                </div>
+                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between">
+                    <div class="bg-orange-700 w-full h-32 rounded-t-lg"></div>
+                    <button class="py-4 text-slate-700/50 font-semibold">#FFFFFF</button>
+                </div>
+                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between">
+                    <div class="bg-amber-700 w-full h-32 rounded-t-lg"></div>
+                    <button class="py-4 text-slate-700/50 font-semibold">#FFFFFF</button>
+                </div>
+                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between">
+                    <div class="bg-sky-700 w-full h-32 rounded-t-lg"></div>
+                    <button class="py-4 text-slate-700/50 font-semibold">#FFFFFF</button>
+                </div>
+                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between">
+                    <div class="bg-stone-700 w-full h-32 rounded-t-lg"></div>
+                    <button class="py-4 text-slate-700/50 font-semibold">#FFFFFF</button>
+                </div>
+                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between">
+                    <div class="bg-lime-700 w-full h-32 rounded-t-lg"></div>
+                    <button class="py-4 text-slate-700/50 font-semibold">#FFFFFF</button>
+                </div>
+                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between">
+                    <div class="bg-emerald-700 w-full h-32 rounded-t-lg"></div>
+                    <button class="py-4 text-slate-700/50 font-semibold">#FFFFFF</button>
+                </div>
+                
+            </div>
+        </section>
+    </main>
+    <footer></footer>
+</body>
+
+</html>

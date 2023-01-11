@@ -1,0 +1,19 @@
+{
+  "name": "easycolor",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "npx parcel src/index.html --open",
+    "build": "npx parcel build src/index.html"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "autoprefixer": "^10.4.13",
+    "parcel": "^2.8.2",
+    "postcss": "^8.4.21",
+    "tailwindcss": "^3.2.4"
+  }
+}
