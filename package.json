@@ -15,5 +15,8 @@
     "parcel": "^2.8.2",
     "postcss": "^8.4.21",
     "tailwindcss": "^3.2.4"
+  },
+  "dependencies": {
+    "chroma-js": "^2.4.2"
   }
 }
