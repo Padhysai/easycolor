@@ -16,12 +16,12 @@
 
 <body class="font-inter bg-white text-black500/70 selection:bg-fuchsia-300 selection:text-fuchsia-900">
     <header
-        class="px-[1.25rem] md:px-[3rem] xl:px-[3vw] py-4 drop-shadow-md sticky top-0 z-30 bg-white bg-opacity-20 backdrop-blur-lg">
+        class="px-[1.25rem] md:px-[3rem] xl:px-[3vw] py-4 drop-shadow-xl sticky top-0 z-[99999] bg-white bg-opacity-80 backdrop-blur-lg">
         <nav class="flex gap-4 items-center justify-between">
             <!-- <img class="w-8 h-8" src="./assets/e-logo.svg" alt="Easy Colors"> -->
             <a class="font-semibold text-3xl text-primary" href="#"><span class="font-bold">E</span>asycolors</a>
             <div class="gap-3 items-center hidden xl:flex">
-                <a class="text-black700 font-semibold rounded-lg hover:bg-slate-100 py-2 px-4 border-2 border-slate-300 shadow-sm bg-opacity-100 bg-white"
+                <a class="text-black700 font-semibold rounded-lg hover:bg-slate-100 py-2 px-4 border border-slate-300 shadow-sm bg-opacity-100 bg-white"
                     href="">Community</a>
                 <a class="bg-primary text-white font-semibold py-2 px-3 rounded-lg hover:bg-hover900 shadow-sm shadow-primary/50"
                     href="">Submit a Color</a>
@@ -35,7 +35,7 @@
         </nav>
     </header>
     <main class="max-w-screen-xl mx-auto py-4">
-        <section class="py-20">
+        <section class="pt-4 pb-8 lg:pt-8 lg:pb-12">
             <h1
                 class="text-3xl lg:text-6xl text-black900 font-bold md:w-9/12 xl:w-full mx-auto text-center xl:leading-snug">
                 Effortless color
@@ -58,8 +58,8 @@
                     as hex and RGB values.</p>
                 <label class="relative block w-2/3 pt-6">
                     <span class="sr-only">Search</span>
-                    <span class="absolute top-[2.1rem] right-3 flex items-center justify-center">
-                        <div class="w-8 h-8 rounded-md cursor-pointer" id="main-picker"></div>
+                    <span class="absolute top-[2.1rem] right-3 flex items-center justify-center cursor-pointer">
+                        <div class="w-8 h-8 rounded-md cursor-pointer color-picker" id="main-picker"></div>
                     </span>
                     <input
                         class="placeholder:italic placeholder:text-slate-400 block bg-white w-full border border-slate-300 rounded-md py-3 pl-4 pr-3 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm md:text-lg font-semibold text-black700"
@@ -68,10 +68,10 @@
                 </label>
             </div>
         </section>
-        <section class="max-w-screen-xl mx-auto py-16 flex justify-center">
-            <div class="w-9/12 xl:w-2/3 h-60 bg-green-700 rounded-lg flex flex-col items-center justify-around" id="color-comp-main">
+        <section class="max-w-screen-xl mx-auto py-8 flex justify-center">
+            <div class="w-9/12 xl:w-2/3 h-60 bg-white text-white animate-pulse rounded-lg flex flex-col items-center justify-around transition-all ease-in-out duration-900" id="color-comp-main">
                 <div class="flex justify-end w-full pr-8 pt-4 md:pt-1 gap-2">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    <svg id="mark-favourite" class="cursor-pointer hover:scale-110 transition-all duration-300" width="24" height="24" viewBox="0 0 24 24" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
                         <path
                             d="M20.84 4.60999C20.3292 4.099 19.7228 3.69364 19.0554 3.41708C18.3879 3.14052 17.6725 2.99817 16.95 2.99817C16.2275 2.99817 15.5121 3.14052 14.8446 3.41708C14.1772 3.69364 13.5708 4.099 13.06 4.60999L12 5.66999L10.94 4.60999C9.9083 3.5783 8.50903 2.9987 7.05 2.9987C5.59096 2.9987 4.19169 3.5783 3.16 4.60999C2.1283 5.64169 1.54871 7.04096 1.54871 8.49999C1.54871 9.95903 2.1283 11.3583 3.16 12.39L4.22 13.45L12 21.23L19.78 13.45L20.84 12.39C21.351 11.8792 21.7563 11.2728 22.0329 10.6053C22.3095 9.93789 22.4518 9.22248 22.4518 8.49999C22.4518 7.77751 22.3095 7.0621 22.0329 6.39464C21.7563 5.72718 21.351 5.12075 20.84 4.60999V4.60999Z"
@@ -80,13 +80,13 @@
 
 
                 </div>
-                <!-- <h3>#FFFFF</h3>
-                <h3 class="color__name">White</h3>
-                <div class="color__list">
+                <h3 id="colorHEX">#FFFFF</h3>
+                <h3 id="colorName" class="color__name text-center">White</h3>
+                <div id="colorList" class="color__list transition-all duration-300">
                     <button>rgb(255,255,255)</button>
                     <button>RGBA(255,255,255, 1)</button>
                     <button>hsl(0,100%,50%)</button>
-                </div> -->
+                </div>
             </div>
         </section>
         <section class="container max-w-screen-xl py-8">
@@ -105,39 +105,40 @@
                     access. Take a look at a variety of shades, pick the perfect color for your next project and mark as
                     favourite.</p>
             </div>
-            <div id="recent-copied-colors"
-                class="container mx-auto py-16 grid grid-cols-2 md:grid-cols-4 xl:grid-cols-8 place-items-center gap-x-6 gap-y-10">
-                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between">
-                    <div class="bg-slate-700 w-full h-32 rounded-t-lg"></div>
-                    <button class="py-4 text-slate-700/50 font-semibold">#FFFFFF</button>
+            <div id="favourite-colors"
+                class="container mx-auto py-16 grid grid-cols-2 md:grid-cols-4 xl:grid-cols-8 place-items-center place-content-center gap-x-6 gap-y-10 fav-div">
+                <img id="no-fav-img" class="col-span-full hidden" src="https://res.cloudinary.com/dh9jyboo4/image/upload/v1673650191/fav_ixsday.gif" alt="No Favourites Text">
+                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between animate-pulse">
+                    <div class="bg-gray-300 w-full h-32 rounded-t-lg"></div>
+                    <button class="py-4 text-gray-300 font-semibold">#FFFFFF</button>
                 </div>
-                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between">
-                    <div class="bg-red-700 w-full h-32 rounded-t-lg"></div>
-                    <button class="py-4 text-slate-700/50 font-semibold">#FFFFFF</button>
+                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between animate-pulse">
+                    <div class="bg-gray-300 w-full h-32 rounded-t-lg"></div>
+                    <button class="py-4 text-gray-300 font-semibold">#FFFFFF</button>
                 </div>
-                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between">
-                    <div class="bg-orange-700 w-full h-32 rounded-t-lg"></div>
-                    <button class="py-4 text-slate-700/50 font-semibold">#FFFFFF</button>
+                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between animate-pulse">
+                    <div class="bg-gray-300 w-full h-32 rounded-t-lg"></div>
+                    <button class="py-4 text-gray-300 font-semibold">#FFFFFF</button>
                 </div>
-                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between">
-                    <div class="bg-amber-700 w-full h-32 rounded-t-lg"></div>
-                    <button class="py-4 text-slate-700/50 font-semibold">#FFFFFF</button>
+                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between animate-pulse">
+                    <div class="bg-gray-300 w-full h-32 rounded-t-lg"></div>
+                    <button class="py-4 text-gray-300 font-semibold">#FFFFFF</button>
                 </div>
-                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between">
-                    <div class="bg-sky-700 w-full h-32 rounded-t-lg"></div>
-                    <button class="py-4 text-slate-700/50 font-semibold">#FFFFFF</button>
+                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between animate-pulse">
+                    <div class="bg-gray-300 w-full h-32 rounded-t-lg"></div>
+                    <button class="py-4 text-gray-300 font-semibold">#FFFFFF</button>
                 </div>
-                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between">
-                    <div class="bg-stone-700 w-full h-32 rounded-t-lg"></div>
-                    <button class="py-4 text-slate-700/50 font-semibold">#FFFFFF</button>
+                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between animate-pulse">
+                    <div class="bg-gray-300 w-full h-32 rounded-t-lg"></div>
+                    <button class="py-4 text-gray-300 font-semibold">#FFFFFF</button>
                 </div>
-                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between">
-                    <div class="bg-lime-700 w-full h-32 rounded-t-lg"></div>
-                    <button class="py-4 text-slate-700/50 font-semibold">#FFFFFF</button>
+                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between animate-pulse">
+                    <div class="bg-gray-300 w-full h-32 rounded-t-lg"></div>
+                    <button class="py-4 text-gray-300 font-semibold">#FFFFFF</button>
                 </div>
-                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between">
-                    <div class="bg-emerald-700 w-full h-32 rounded-t-lg"></div>
-                    <button class="py-4 text-slate-700/50 font-semibold">#FFFFFF</button>
+                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between animate-pulse">
+                    <div class="bg-gray-300 w-full h-32 rounded-t-lg"></div>
+                    <button class="py-4 text-gray-300 font-semibold">#FFFFFF</button>
                 </div>
 
             </div>
@@ -158,167 +159,167 @@
                     elements. They are essential in website UI design to create a visually appealing and user-friendly
                     experience. It's important to use them in a balanced and appropriate way throughout the website.</p>
             </div>
-            <div id="recent-copied-colors"
+            <div id="primary-colors"
                 class="container mx-auto py-16 grid grid-cols-2 md:grid-cols-4 xl:grid-cols-8 place-items-center gap-x-6 gap-y-10">
-                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between">
-                    <div class="bg-slate-700 w-full h-32 rounded-t-lg"></div>
-                    <button class="py-4 text-slate-700/50 font-semibold">#FFFFFF</button>
+                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between animate-pulse">
+                    <div class="bg-gray-300 w-full h-32 rounded-t-lg"></div>
+                    <button class="py-4 text-gray-300 font-semibold">#FFFFFF</button>
                 </div>
-                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between">
-                    <div class="bg-red-700 w-full h-32 rounded-t-lg"></div>
-                    <button class="py-4 text-slate-700/50 font-semibold">#FFFFFF</button>
+                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between animate-pulse">
+                    <div class="bg-gray-300 w-full h-32 rounded-t-lg"></div>
+                    <button class="py-4 text-gray-300 font-semibold">#FFFFFF</button>
                 </div>
-                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between">
-                    <div class="bg-orange-700 w-full h-32 rounded-t-lg"></div>
-                    <button class="py-4 text-slate-700/50 font-semibold">#FFFFFF</button>
+                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between animate-pulse">
+                    <div class="bg-gray-300 w-full h-32 rounded-t-lg"></div>
+                    <button class="py-4 text-gray-300 font-semibold">#FFFFFF</button>
                 </div>
-                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between">
-                    <div class="bg-amber-700 w-full h-32 rounded-t-lg"></div>
-                    <button class="py-4 text-slate-700/50 font-semibold">#FFFFFF</button>
+                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between animate-pulse">
+                    <div class="bg-gray-300 w-full h-32 rounded-t-lg"></div>
+                    <button class="py-4 text-gray-300 font-semibold">#FFFFFF</button>
                 </div>
-                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between">
-                    <div class="bg-sky-700 w-full h-32 rounded-t-lg"></div>
-                    <button class="py-4 text-slate-700/50 font-semibold">#FFFFFF</button>
+                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between animate-pulse">
+                    <div class="bg-gray-300 w-full h-32 rounded-t-lg"></div>
+                    <button class="py-4 text-gray-300 font-semibold">#FFFFFF</button>
                 </div>
-                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between">
-                    <div class="bg-stone-700 w-full h-32 rounded-t-lg"></div>
-                    <button class="py-4 text-slate-700/50 font-semibold">#FFFFFF</button>
+                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between animate-pulse">
+                    <div class="bg-gray-300 w-full h-32 rounded-t-lg"></div>
+                    <button class="py-4 text-gray-300 font-semibold">#FFFFFF</button>
                 </div>
-                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between">
-                    <div class="bg-lime-700 w-full h-32 rounded-t-lg"></div>
-                    <button class="py-4 text-slate-700/50 font-semibold">#FFFFFF</button>
+                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between animate-pulse">
+                    <div class="bg-gray-300 w-full h-32 rounded-t-lg"></div>
+                    <button class="py-4 text-gray-300 font-semibold">#FFFFFF</button>
                 </div>
-                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between">
-                    <div class="bg-emerald-700 w-full h-32 rounded-t-lg"></div>
-                    <button class="py-4 text-slate-700/50 font-semibold">#FFFFFF</button>
+                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between animate-pulse">
+                    <div class="bg-gray-300 w-full h-32 rounded-t-lg"></div>
+                    <button class="py-4 text-gray-300 font-semibold">#FFFFFF</button>
                 </div>
-                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between">
-                    <div class="bg-slate-700 w-full h-32 rounded-t-lg"></div>
-                    <button class="py-4 text-slate-700/50 font-semibold">#FFFFFF</button>
+                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between animate-pulse">
+                    <div class="bg-gray-300 w-full h-32 rounded-t-lg"></div>
+                    <button class="py-4 text-gray-300 font-semibold">#FFFFFF</button>
                 </div>
-                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between">
-                    <div class="bg-red-700 w-full h-32 rounded-t-lg"></div>
-                    <button class="py-4 text-slate-700/50 font-semibold">#FFFFFF</button>
+                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between animate-pulse">
+                    <div class="bg-gray-300 w-full h-32 rounded-t-lg"></div>
+                    <button class="py-4 text-gray-300 font-semibold">#FFFFFF</button>
                 </div>
-                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between">
-                    <div class="bg-orange-700 w-full h-32 rounded-t-lg"></div>
-                    <button class="py-4 text-slate-700/50 font-semibold">#FFFFFF</button>
+                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between animate-pulse">
+                    <div class="bg-gray-300 w-full h-32 rounded-t-lg"></div>
+                    <button class="py-4 text-gray-300 font-semibold">#FFFFFF</button>
                 </div>
-                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between">
-                    <div class="bg-amber-700 w-full h-32 rounded-t-lg"></div>
-                    <button class="py-4 text-slate-700/50 font-semibold">#FFFFFF</button>
+                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between animate-pulse">
+                    <div class="bg-gray-300 w-full h-32 rounded-t-lg"></div>
+                    <button class="py-4 text-gray-300 font-semibold">#FFFFFF</button>
                 </div>
-                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between">
-                    <div class="bg-sky-700 w-full h-32 rounded-t-lg"></div>
-                    <button class="py-4 text-slate-700/50 font-semibold">#FFFFFF</button>
+                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between animate-pulse">
+                    <div class="bg-gray-300 w-full h-32 rounded-t-lg"></div>
+                    <button class="py-4 text-gray-300 font-semibold">#FFFFFF</button>
                 </div>
-                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between">
-                    <div class="bg-stone-700 w-full h-32 rounded-t-lg"></div>
-                    <button class="py-4 text-slate-700/50 font-semibold">#FFFFFF</button>
+                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between animate-pulse">
+                    <div class="bg-gray-300 w-full h-32 rounded-t-lg"></div>
+                    <button class="py-4 text-gray-300 font-semibold">#FFFFFF</button>
                 </div>
-                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between">
-                    <div class="bg-lime-700 w-full h-32 rounded-t-lg"></div>
-                    <button class="py-4 text-slate-700/50 font-semibold">#FFFFFF</button>
+                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between animate-pulse">
+                    <div class="bg-gray-300 w-full h-32 rounded-t-lg"></div>
+                    <button class="py-4 text-gray-300 font-semibold">#FFFFFF</button>
                 </div>
-                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between">
-                    <div class="bg-emerald-700 w-full h-32 rounded-t-lg"></div>
-                    <button class="py-4 text-slate-700/50 font-semibold">#FFFFFF</button>
+                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between animate-pulse">
+                    <div class="bg-gray-300 w-full h-32 rounded-t-lg"></div>
+                    <button class="py-4 text-gray-300 font-semibold">#FFFFFF</button>
                 </div>
-                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between">
-                    <div class="bg-slate-700 w-full h-32 rounded-t-lg"></div>
-                    <button class="py-4 text-slate-700/50 font-semibold">#FFFFFF</button>
+                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between animate-pulse">
+                    <div class="bg-gray-300 w-full h-32 rounded-t-lg"></div>
+                    <button class="py-4 text-gray-300 font-semibold">#FFFFFF</button>
                 </div>
-                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between">
-                    <div class="bg-red-700 w-full h-32 rounded-t-lg"></div>
-                    <button class="py-4 text-slate-700/50 font-semibold">#FFFFFF</button>
+                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between animate-pulse">
+                    <div class="bg-gray-300 w-full h-32 rounded-t-lg"></div>
+                    <button class="py-4 text-gray-300 font-semibold">#FFFFFF</button>
                 </div>
-                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between">
-                    <div class="bg-orange-700 w-full h-32 rounded-t-lg"></div>
-                    <button class="py-4 text-slate-700/50 font-semibold">#FFFFFF</button>
+                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between animate-pulse">
+                    <div class="bg-gray-300 w-full h-32 rounded-t-lg"></div>
+                    <button class="py-4 text-gray-300 font-semibold">#FFFFFF</button>
                 </div>
-                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between">
-                    <div class="bg-amber-700 w-full h-32 rounded-t-lg"></div>
-                    <button class="py-4 text-slate-700/50 font-semibold">#FFFFFF</button>
+                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between animate-pulse">
+                    <div class="bg-gray-300 w-full h-32 rounded-t-lg"></div>
+                    <button class="py-4 text-gray-300 font-semibold">#FFFFFF</button>
                 </div>
-                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between">
-                    <div class="bg-sky-700 w-full h-32 rounded-t-lg"></div>
-                    <button class="py-4 text-slate-700/50 font-semibold">#FFFFFF</button>
+                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between animate-pulse">
+                    <div class="bg-gray-300 w-full h-32 rounded-t-lg"></div>
+                    <button class="py-4 text-gray-300 font-semibold">#FFFFFF</button>
                 </div>
-                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between">
-                    <div class="bg-stone-700 w-full h-32 rounded-t-lg"></div>
-                    <button class="py-4 text-slate-700/50 font-semibold">#FFFFFF</button>
+                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between animate-pulse">
+                    <div class="bg-gray-300 w-full h-32 rounded-t-lg"></div>
+                    <button class="py-4 text-gray-300 font-semibold">#FFFFFF</button>
                 </div>
-                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between">
-                    <div class="bg-lime-700 w-full h-32 rounded-t-lg"></div>
-                    <button class="py-4 text-slate-700/50 font-semibold">#FFFFFF</button>
+                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between animate-pulse">
+                    <div class="bg-gray-300 w-full h-32 rounded-t-lg"></div>
+                    <button class="py-4 text-gray-300 font-semibold">#FFFFFF</button>
                 </div>
-                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between">
-                    <div class="bg-emerald-700 w-full h-32 rounded-t-lg"></div>
-                    <button class="py-4 text-slate-700/50 font-semibold">#FFFFFF</button>
+                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between animate-pulse">
+                    <div class="bg-gray-300 w-full h-32 rounded-t-lg"></div>
+                    <button class="py-4 text-gray-300 font-semibold">#FFFFFF</button>
                 </div>
-                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between">
-                    <div class="bg-slate-700 w-full h-32 rounded-t-lg"></div>
-                    <button class="py-4 text-slate-700/50 font-semibold">#FFFFFF</button>
+                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between animate-pulse">
+                    <div class="bg-gray-300 w-full h-32 rounded-t-lg"></div>
+                    <button class="py-4 text-gray-300 font-semibold">#FFFFFF</button>
                 </div>
-                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between">
-                    <div class="bg-red-700 w-full h-32 rounded-t-lg"></div>
-                    <button class="py-4 text-slate-700/50 font-semibold">#FFFFFF</button>
+                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between animate-pulse">
+                    <div class="bg-gray-300 w-full h-32 rounded-t-lg"></div>
+                    <button class="py-4 text-gray-300 font-semibold">#FFFFFF</button>
                 </div>
-                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between">
-                    <div class="bg-orange-700 w-full h-32 rounded-t-lg"></div>
-                    <button class="py-4 text-slate-700/50 font-semibold">#FFFFFF</button>
+                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between animate-pulse">
+                    <div class="bg-gray-300 w-full h-32 rounded-t-lg"></div>
+                    <button class="py-4 text-gray-300 font-semibold">#FFFFFF</button>
                 </div>
-                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between">
-                    <div class="bg-amber-700 w-full h-32 rounded-t-lg"></div>
-                    <button class="py-4 text-slate-700/50 font-semibold">#FFFFFF</button>
+                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between animate-pulse">
+                    <div class="bg-gray-300 w-full h-32 rounded-t-lg"></div>
+                    <button class="py-4 text-gray-300 font-semibold">#FFFFFF</button>
                 </div>
-                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between">
-                    <div class="bg-sky-700 w-full h-32 rounded-t-lg"></div>
-                    <button class="py-4 text-slate-700/50 font-semibold">#FFFFFF</button>
+                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between animate-pulse">
+                    <div class="bg-gray-300 w-full h-32 rounded-t-lg"></div>
+                    <button class="py-4 text-gray-300 font-semibold">#FFFFFF</button>
                 </div>
-                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between">
-                    <div class="bg-stone-700 w-full h-32 rounded-t-lg"></div>
-                    <button class="py-4 text-slate-700/50 font-semibold">#FFFFFF</button>
+                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between animate-pulse">
+                    <div class="bg-gray-300 w-full h-32 rounded-t-lg"></div>
+                    <button class="py-4 text-gray-300 font-semibold">#FFFFFF</button>
                 </div>
-                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between">
-                    <div class="bg-lime-700 w-full h-32 rounded-t-lg"></div>
-                    <button class="py-4 text-slate-700/50 font-semibold">#FFFFFF</button>
+                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between animate-pulse">
+                    <div class="bg-gray-300 w-full h-32 rounded-t-lg"></div>
+                    <button class="py-4 text-gray-300 font-semibold">#FFFFFF</button>
                 </div>
-                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between">
-                    <div class="bg-emerald-700 w-full h-32 rounded-t-lg"></div>
-                    <button class="py-4 text-slate-700/50 font-semibold">#FFFFFF</button>
+                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between animate-pulse">
+                    <div class="bg-gray-300 w-full h-32 rounded-t-lg"></div>
+                    <button class="py-4 text-gray-300 font-semibold">#FFFFFF</button>
                 </div>
-                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between">
-                    <div class="bg-slate-700 w-full h-32 rounded-t-lg"></div>
-                    <button class="py-4 text-slate-700/50 font-semibold">#FFFFFF</button>
+                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between animate-pulse">
+                    <div class="bg-gray-300 w-full h-32 rounded-t-lg"></div>
+                    <button class="py-4 text-gray-300 font-semibold">#FFFFFF</button>
                 </div>
-                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between">
-                    <div class="bg-red-700 w-full h-32 rounded-t-lg"></div>
-                    <button class="py-4 text-slate-700/50 font-semibold">#FFFFFF</button>
+                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between animate-pulse">
+                    <div class="bg-gray-300 w-full h-32 rounded-t-lg"></div>
+                    <button class="py-4 text-gray-300 font-semibold">#FFFFFF</button>
                 </div>
-                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between">
-                    <div class="bg-orange-700 w-full h-32 rounded-t-lg"></div>
-                    <button class="py-4 text-slate-700/50 font-semibold">#FFFFFF</button>
+                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between animate-pulse">
+                    <div class="bg-gray-300 w-full h-32 rounded-t-lg"></div>
+                    <button class="py-4 text-gray-300 font-semibold">#FFFFFF</button>
                 </div>
-                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between">
-                    <div class="bg-amber-700 w-full h-32 rounded-t-lg"></div>
-                    <button class="py-4 text-slate-700/50 font-semibold">#FFFFFF</button>
+                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between animate-pulse">
+                    <div class="bg-gray-300 w-full h-32 rounded-t-lg"></div>
+                    <button class="py-4 text-gray-300 font-semibold">#FFFFFF</button>
                 </div>
-                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between">
-                    <div class="bg-sky-700 w-full h-32 rounded-t-lg"></div>
-                    <button class="py-4 text-slate-700/50 font-semibold">#FFFFFF</button>
+                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between animate-pulse">
+                    <div class="bg-gray-300 w-full h-32 rounded-t-lg"></div>
+                    <button class="py-4 text-gray-300 font-semibold">#FFFFFF</button>
                 </div>
-                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between">
-                    <div class="bg-stone-700 w-full h-32 rounded-t-lg"></div>
-                    <button class="py-4 text-slate-700/50 font-semibold">#FFFFFF</button>
+                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between animate-pulse">
+                    <div class="bg-gray-300 w-full h-32 rounded-t-lg"></div>
+                    <button class="py-4 text-gray-300 font-semibold">#FFFFFF</button>
                 </div>
-                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between">
-                    <div class="bg-lime-700 w-full h-32 rounded-t-lg"></div>
-                    <button class="py-4 text-slate-700/50 font-semibold">#FFFFFF</button>
+                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between animate-pulse">
+                    <div class="bg-gray-300 w-full h-32 rounded-t-lg"></div>
+                    <button class="py-4 text-gray-300 font-semibold">#FFFFFF</button>
                 </div>
-                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between">
-                    <div class="bg-emerald-700 w-full h-32 rounded-t-lg"></div>
-                    <button class="py-4 text-slate-700/50 font-semibold">#FFFFFF</button>
+                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between animate-pulse">
+                    <div class="bg-gray-300 w-full h-32 rounded-t-lg"></div>
+                    <button class="py-4 text-gray-300 font-semibold">#FFFFFF</button>
                 </div>
 
             </div>
@@ -339,167 +340,263 @@
                     labels. These secondary colors should be used sparingly or as accents, while the primary color(s)
                     should take precedence.</p>
             </div>
-            <div id="recent-copied-colors"
+            <div id="secondary-colors"
                 class="container mx-auto py-16 grid grid-cols-2 md:grid-cols-4 xl:grid-cols-8 place-items-center gap-x-6 gap-y-10">
-                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between">
-                    <div class="bg-slate-700 w-full h-32 rounded-t-lg"></div>
-                    <button class="py-4 text-slate-700/50 font-semibold">#FFFFFF</button>
+                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between animate-pulse">
+                    <div class="bg-gray-300 w-full h-32 rounded-t-lg"></div>
+                    <button class="py-4 text-gray-300 font-semibold">#FFFFFF</button>
                 </div>
-                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between">
-                    <div class="bg-red-700 w-full h-32 rounded-t-lg"></div>
-                    <button class="py-4 text-slate-700/50 font-semibold">#FFFFFF</button>
+                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between animate-pulse">
+                    <div class="bg-gray-300 w-full h-32 rounded-t-lg"></div>
+                    <button class="py-4 text-gray-300 font-semibold">#FFFFFF</button>
                 </div>
-                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between">
-                    <div class="bg-orange-700 w-full h-32 rounded-t-lg"></div>
-                    <button class="py-4 text-slate-700/50 font-semibold">#FFFFFF</button>
+                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between animate-pulse">
+                    <div class="bg-gray-300 w-full h-32 rounded-t-lg"></div>
+                    <button class="py-4 text-gray-300 font-semibold">#FFFFFF</button>
                 </div>
-                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between">
-                    <div class="bg-amber-700 w-full h-32 rounded-t-lg"></div>
-                    <button class="py-4 text-slate-700/50 font-semibold">#FFFFFF</button>
+                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between animate-pulse">
+                    <div class="bg-gray-300 w-full h-32 rounded-t-lg"></div>
+                    <button class="py-4 text-gray-300 font-semibold">#FFFFFF</button>
                 </div>
-                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between">
-                    <div class="bg-sky-700 w-full h-32 rounded-t-lg"></div>
-                    <button class="py-4 text-slate-700/50 font-semibold">#FFFFFF</button>
+                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between animate-pulse">
+                    <div class="bg-gray-300 w-full h-32 rounded-t-lg"></div>
+                    <button class="py-4 text-gray-300 font-semibold">#FFFFFF</button>
                 </div>
-                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between">
-                    <div class="bg-stone-700 w-full h-32 rounded-t-lg"></div>
-                    <button class="py-4 text-slate-700/50 font-semibold">#FFFFFF</button>
+                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between animate-pulse">
+                    <div class="bg-gray-300 w-full h-32 rounded-t-lg"></div>
+                    <button class="py-4 text-gray-300 font-semibold">#FFFFFF</button>
                 </div>
-                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between">
-                    <div class="bg-lime-700 w-full h-32 rounded-t-lg"></div>
-                    <button class="py-4 text-slate-700/50 font-semibold">#FFFFFF</button>
+                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between animate-pulse">
+                    <div class="bg-gray-300 w-full h-32 rounded-t-lg"></div>
+                    <button class="py-4 text-gray-300 font-semibold">#FFFFFF</button>
                 </div>
-                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between">
-                    <div class="bg-emerald-700 w-full h-32 rounded-t-lg"></div>
-                    <button class="py-4 text-slate-700/50 font-semibold">#FFFFFF</button>
+                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between animate-pulse">
+                    <div class="bg-gray-300 w-full h-32 rounded-t-lg"></div>
+                    <button class="py-4 text-gray-300 font-semibold">#FFFFFF</button>
                 </div>
-                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between">
-                    <div class="bg-slate-700 w-full h-32 rounded-t-lg"></div>
-                    <button class="py-4 text-slate-700/50 font-semibold">#FFFFFF</button>
+                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between animate-pulse">
+                    <div class="bg-gray-300 w-full h-32 rounded-t-lg"></div>
+                    <button class="py-4 text-gray-300 font-semibold">#FFFFFF</button>
                 </div>
-                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between">
-                    <div class="bg-red-700 w-full h-32 rounded-t-lg"></div>
-                    <button class="py-4 text-slate-700/50 font-semibold">#FFFFFF</button>
+                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between animate-pulse">
+                    <div class="bg-gray-300 w-full h-32 rounded-t-lg"></div>
+                    <button class="py-4 text-gray-300 font-semibold">#FFFFFF</button>
                 </div>
-                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between">
-                    <div class="bg-orange-700 w-full h-32 rounded-t-lg"></div>
-                    <button class="py-4 text-slate-700/50 font-semibold">#FFFFFF</button>
+                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between animate-pulse">
+                    <div class="bg-gray-300 w-full h-32 rounded-t-lg"></div>
+                    <button class="py-4 text-gray-300 font-semibold">#FFFFFF</button>
                 </div>
-                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between">
-                    <div class="bg-amber-700 w-full h-32 rounded-t-lg"></div>
-                    <button class="py-4 text-slate-700/50 font-semibold">#FFFFFF</button>
+                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between animate-pulse">
+                    <div class="bg-gray-300 w-full h-32 rounded-t-lg"></div>
+                    <button class="py-4 text-gray-300 font-semibold">#FFFFFF</button>
                 </div>
-                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between">
-                    <div class="bg-sky-700 w-full h-32 rounded-t-lg"></div>
-                    <button class="py-4 text-slate-700/50 font-semibold">#FFFFFF</button>
+                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between animate-pulse">
+                    <div class="bg-gray-300 w-full h-32 rounded-t-lg"></div>
+                    <button class="py-4 text-gray-300 font-semibold">#FFFFFF</button>
                 </div>
-                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between">
-                    <div class="bg-stone-700 w-full h-32 rounded-t-lg"></div>
-                    <button class="py-4 text-slate-700/50 font-semibold">#FFFFFF</button>
+                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between animate-pulse">
+                    <div class="bg-gray-300 w-full h-32 rounded-t-lg"></div>
+                    <button class="py-4 text-gray-300 font-semibold">#FFFFFF</button>
                 </div>
-                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between">
-                    <div class="bg-lime-700 w-full h-32 rounded-t-lg"></div>
-                    <button class="py-4 text-slate-700/50 font-semibold">#FFFFFF</button>
+                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between animate-pulse">
+                    <div class="bg-gray-300 w-full h-32 rounded-t-lg"></div>
+                    <button class="py-4 text-gray-300 font-semibold">#FFFFFF</button>
                 </div>
-                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between">
-                    <div class="bg-emerald-700 w-full h-32 rounded-t-lg"></div>
-                    <button class="py-4 text-slate-700/50 font-semibold">#FFFFFF</button>
+                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between animate-pulse">
+                    <div class="bg-gray-300 w-full h-32 rounded-t-lg"></div>
+                    <button class="py-4 text-gray-300 font-semibold">#FFFFFF</button>
                 </div>
-                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between">
-                    <div class="bg-slate-700 w-full h-32 rounded-t-lg"></div>
-                    <button class="py-4 text-slate-700/50 font-semibold">#FFFFFF</button>
+                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between animate-pulse">
+                    <div class="bg-gray-300 w-full h-32 rounded-t-lg"></div>
+                    <button class="py-4 text-gray-300 font-semibold">#FFFFFF</button>
                 </div>
-                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between">
-                    <div class="bg-red-700 w-full h-32 rounded-t-lg"></div>
-                    <button class="py-4 text-slate-700/50 font-semibold">#FFFFFF</button>
+                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between animate-pulse">
+                    <div class="bg-gray-300 w-full h-32 rounded-t-lg"></div>
+                    <button class="py-4 text-gray-300 font-semibold">#FFFFFF</button>
                 </div>
-                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between">
-                    <div class="bg-orange-700 w-full h-32 rounded-t-lg"></div>
-                    <button class="py-4 text-slate-700/50 font-semibold">#FFFFFF</button>
+                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between animate-pulse">
+                    <div class="bg-gray-300 w-full h-32 rounded-t-lg"></div>
+                    <button class="py-4 text-gray-300 font-semibold">#FFFFFF</button>
                 </div>
-                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between">
-                    <div class="bg-amber-700 w-full h-32 rounded-t-lg"></div>
-                    <button class="py-4 text-slate-700/50 font-semibold">#FFFFFF</button>
+                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between animate-pulse">
+                    <div class="bg-gray-300 w-full h-32 rounded-t-lg"></div>
+                    <button class="py-4 text-gray-300 font-semibold">#FFFFFF</button>
                 </div>
-                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between">
-                    <div class="bg-sky-700 w-full h-32 rounded-t-lg"></div>
-                    <button class="py-4 text-slate-700/50 font-semibold">#FFFFFF</button>
+                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between animate-pulse">
+                    <div class="bg-gray-300 w-full h-32 rounded-t-lg"></div>
+                    <button class="py-4 text-gray-300 font-semibold">#FFFFFF</button>
                 </div>
-                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between">
-                    <div class="bg-stone-700 w-full h-32 rounded-t-lg"></div>
-                    <button class="py-4 text-slate-700/50 font-semibold">#FFFFFF</button>
+                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between animate-pulse">
+                    <div class="bg-gray-300 w-full h-32 rounded-t-lg"></div>
+                    <button class="py-4 text-gray-300 font-semibold">#FFFFFF</button>
                 </div>
-                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between">
-                    <div class="bg-lime-700 w-full h-32 rounded-t-lg"></div>
-                    <button class="py-4 text-slate-700/50 font-semibold">#FFFFFF</button>
+                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between animate-pulse">
+                    <div class="bg-gray-300 w-full h-32 rounded-t-lg"></div>
+                    <button class="py-4 text-gray-300 font-semibold">#FFFFFF</button>
                 </div>
-                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between">
-                    <div class="bg-emerald-700 w-full h-32 rounded-t-lg"></div>
-                    <button class="py-4 text-slate-700/50 font-semibold">#FFFFFF</button>
+                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between animate-pulse">
+                    <div class="bg-gray-300 w-full h-32 rounded-t-lg"></div>
+                    <button class="py-4 text-gray-300 font-semibold">#FFFFFF</button>
                 </div>
-                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between">
-                    <div class="bg-slate-700 w-full h-32 rounded-t-lg"></div>
-                    <button class="py-4 text-slate-700/50 font-semibold">#FFFFFF</button>
+                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between animate-pulse">
+                    <div class="bg-gray-300 w-full h-32 rounded-t-lg"></div>
+                    <button class="py-4 text-gray-300 font-semibold">#FFFFFF</button>
                 </div>
-                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between">
-                    <div class="bg-red-700 w-full h-32 rounded-t-lg"></div>
-                    <button class="py-4 text-slate-700/50 font-semibold">#FFFFFF</button>
+                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between animate-pulse">
+                    <div class="bg-gray-300 w-full h-32 rounded-t-lg"></div>
+                    <button class="py-4 text-gray-300 font-semibold">#FFFFFF</button>
                 </div>
-                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between">
-                    <div class="bg-orange-700 w-full h-32 rounded-t-lg"></div>
-                    <button class="py-4 text-slate-700/50 font-semibold">#FFFFFF</button>
+                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between animate-pulse">
+                    <div class="bg-gray-300 w-full h-32 rounded-t-lg"></div>
+                    <button class="py-4 text-gray-300 font-semibold">#FFFFFF</button>
                 </div>
-                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between">
-                    <div class="bg-amber-700 w-full h-32 rounded-t-lg"></div>
-                    <button class="py-4 text-slate-700/50 font-semibold">#FFFFFF</button>
+                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between animate-pulse">
+                    <div class="bg-gray-300 w-full h-32 rounded-t-lg"></div>
+                    <button class="py-4 text-gray-300 font-semibold">#FFFFFF</button>
                 </div>
-                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between">
-                    <div class="bg-sky-700 w-full h-32 rounded-t-lg"></div>
-                    <button class="py-4 text-slate-700/50 font-semibold">#FFFFFF</button>
+                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between animate-pulse">
+                    <div class="bg-gray-300 w-full h-32 rounded-t-lg"></div>
+                    <button class="py-4 text-gray-300 font-semibold">#FFFFFF</button>
                 </div>
-                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between">
-                    <div class="bg-stone-700 w-full h-32 rounded-t-lg"></div>
-                    <button class="py-4 text-slate-700/50 font-semibold">#FFFFFF</button>
+                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between animate-pulse">
+                    <div class="bg-gray-300 w-full h-32 rounded-t-lg"></div>
+                    <button class="py-4 text-gray-300 font-semibold">#FFFFFF</button>
                 </div>
-                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between">
-                    <div class="bg-lime-700 w-full h-32 rounded-t-lg"></div>
-                    <button class="py-4 text-slate-700/50 font-semibold">#FFFFFF</button>
+                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between animate-pulse">
+                    <div class="bg-gray-300 w-full h-32 rounded-t-lg"></div>
+                    <button class="py-4 text-gray-300 font-semibold">#FFFFFF</button>
                 </div>
-                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between">
-                    <div class="bg-emerald-700 w-full h-32 rounded-t-lg"></div>
-                    <button class="py-4 text-slate-700/50 font-semibold">#FFFFFF</button>
+                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between animate-pulse">
+                    <div class="bg-gray-300 w-full h-32 rounded-t-lg"></div>
+                    <button class="py-4 text-gray-300 font-semibold">#FFFFFF</button>
                 </div>
-                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between">
-                    <div class="bg-slate-700 w-full h-32 rounded-t-lg"></div>
-                    <button class="py-4 text-slate-700/50 font-semibold">#FFFFFF</button>
+                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between animate-pulse">
+                    <div class="bg-gray-300 w-full h-32 rounded-t-lg"></div>
+                    <button class="py-4 text-gray-300 font-semibold">#FFFFFF</button>
                 </div>
-                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between">
-                    <div class="bg-red-700 w-full h-32 rounded-t-lg"></div>
-                    <button class="py-4 text-slate-700/50 font-semibold">#FFFFFF</button>
+                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between animate-pulse">
+                    <div class="bg-gray-300 w-full h-32 rounded-t-lg"></div>
+                    <button class="py-4 text-gray-300 font-semibold">#FFFFFF</button>
                 </div>
-                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between">
-                    <div class="bg-orange-700 w-full h-32 rounded-t-lg"></div>
-                    <button class="py-4 text-slate-700/50 font-semibold">#FFFFFF</button>
+                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between animate-pulse">
+                    <div class="bg-gray-300 w-full h-32 rounded-t-lg"></div>
+                    <button class="py-4 text-gray-300 font-semibold">#FFFFFF</button>
                 </div>
-                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between">
-                    <div class="bg-amber-700 w-full h-32 rounded-t-lg"></div>
-                    <button class="py-4 text-slate-700/50 font-semibold">#FFFFFF</button>
+                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between animate-pulse">
+                    <div class="bg-gray-300 w-full h-32 rounded-t-lg"></div>
+                    <button class="py-4 text-gray-300 font-semibold">#FFFFFF</button>
                 </div>
-                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between">
-                    <div class="bg-sky-700 w-full h-32 rounded-t-lg"></div>
-                    <button class="py-4 text-slate-700/50 font-semibold">#FFFFFF</button>
+                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between animate-pulse">
+                    <div class="bg-gray-300 w-full h-32 rounded-t-lg"></div>
+                    <button class="py-4 text-gray-300 font-semibold">#FFFFFF</button>
                 </div>
-                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between">
-                    <div class="bg-stone-700 w-full h-32 rounded-t-lg"></div>
-                    <button class="py-4 text-slate-700/50 font-semibold">#FFFFFF</button>
+                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between animate-pulse">
+                    <div class="bg-gray-300 w-full h-32 rounded-t-lg"></div>
+                    <button class="py-4 text-gray-300 font-semibold">#FFFFFF</button>
                 </div>
-                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between">
-                    <div class="bg-lime-700 w-full h-32 rounded-t-lg"></div>
-                    <button class="py-4 text-slate-700/50 font-semibold">#FFFFFF</button>
+                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between animate-pulse">
+                    <div class="bg-gray-300 w-full h-32 rounded-t-lg"></div>
+                    <button class="py-4 text-gray-300 font-semibold">#FFFFFF</button>
                 </div>
-                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between">
-                    <div class="bg-emerald-700 w-full h-32 rounded-t-lg"></div>
-                    <button class="py-4 text-slate-700/50 font-semibold">#FFFFFF</button>
+                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between animate-pulse">
+                    <div class="bg-gray-300 w-full h-32 rounded-t-lg"></div>
+                    <button class="py-4 text-gray-300 font-semibold">#FFFFFF</button>
+                </div>
+                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between animate-pulse">
+                    <div class="bg-gray-300 w-full h-32 rounded-t-lg"></div>
+                    <button class="py-4 text-gray-300 font-semibold">#FFFFFF</button>
+                </div>
+                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between animate-pulse">
+                    <div class="bg-gray-300 w-full h-32 rounded-t-lg"></div>
+                    <button class="py-4 text-gray-300 font-semibold">#FFFFFF</button>
+                </div>
+                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between animate-pulse">
+                    <div class="bg-gray-300 w-full h-32 rounded-t-lg"></div>
+                    <button class="py-4 text-gray-300 font-semibold">#FFFFFF</button>
+                </div>
+                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between animate-pulse">
+                    <div class="bg-gray-300 w-full h-32 rounded-t-lg"></div>
+                    <button class="py-4 text-gray-300 font-semibold">#FFFFFF</button>
+                </div>
+                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between animate-pulse">
+                    <div class="bg-gray-300 w-full h-32 rounded-t-lg"></div>
+                    <button class="py-4 text-gray-300 font-semibold">#FFFFFF</button>
+                </div>
+                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between animate-pulse">
+                    <div class="bg-gray-300 w-full h-32 rounded-t-lg"></div>
+                    <button class="py-4 text-gray-300 font-semibold">#FFFFFF</button>
+                </div>
+                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between animate-pulse">
+                    <div class="bg-gray-300 w-full h-32 rounded-t-lg"></div>
+                    <button class="py-4 text-gray-300 font-semibold">#FFFFFF</button>
+                </div>
+                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between animate-pulse">
+                    <div class="bg-gray-300 w-full h-32 rounded-t-lg"></div>
+                    <button class="py-4 text-gray-300 font-semibold">#FFFFFF</button>
+                </div>
+                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between animate-pulse">
+                    <div class="bg-gray-300 w-full h-32 rounded-t-lg"></div>
+                    <button class="py-4 text-gray-300 font-semibold">#FFFFFF</button>
+                </div>
+                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between animate-pulse">
+                    <div class="bg-gray-300 w-full h-32 rounded-t-lg"></div>
+                    <button class="py-4 text-gray-300 font-semibold">#FFFFFF</button>
+                </div>
+                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between animate-pulse">
+                    <div class="bg-gray-300 w-full h-32 rounded-t-lg"></div>
+                    <button class="py-4 text-gray-300 font-semibold">#FFFFFF</button>
+                </div>
+                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between animate-pulse">
+                    <div class="bg-gray-300 w-full h-32 rounded-t-lg"></div>
+                    <button class="py-4 text-gray-300 font-semibold">#FFFFFF</button>
+                </div>
+                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between animate-pulse">
+                    <div class="bg-gray-300 w-full h-32 rounded-t-lg"></div>
+                    <button class="py-4 text-gray-300 font-semibold">#FFFFFF</button>
+                </div>
+                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between animate-pulse">
+                    <div class="bg-gray-300 w-full h-32 rounded-t-lg"></div>
+                    <button class="py-4 text-gray-300 font-semibold">#FFFFFF</button>
+                </div>
+                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between animate-pulse">
+                    <div class="bg-gray-300 w-full h-32 rounded-t-lg"></div>
+                    <button class="py-4 text-gray-300 font-semibold">#FFFFFF</button>
+                </div>
+                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between animate-pulse">
+                    <div class="bg-gray-300 w-full h-32 rounded-t-lg"></div>
+                    <button class="py-4 text-gray-300 font-semibold">#FFFFFF</button>
+                </div>
+                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between animate-pulse">
+                    <div class="bg-gray-300 w-full h-32 rounded-t-lg"></div>
+                    <button class="py-4 text-gray-300 font-semibold">#FFFFFF</button>
+                </div>
+                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between animate-pulse">
+                    <div class="bg-gray-300 w-full h-32 rounded-t-lg"></div>
+                    <button class="py-4 text-gray-300 font-semibold">#FFFFFF</button>
+                </div>
+                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between animate-pulse">
+                    <div class="bg-gray-300 w-full h-32 rounded-t-lg"></div>
+                    <button class="py-4 text-gray-300 font-semibold">#FFFFFF</button>
+                </div>
+                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between animate-pulse">
+                    <div class="bg-gray-300 w-full h-32 rounded-t-lg"></div>
+                    <button class="py-4 text-gray-300 font-semibold">#FFFFFF</button>
+                </div>
+                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between animate-pulse">
+                    <div class="bg-gray-300 w-full h-32 rounded-t-lg"></div>
+                    <button class="py-4 text-gray-300 font-semibold">#FFFFFF</button>
+                </div>
+                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between animate-pulse">
+                    <div class="bg-gray-300 w-full h-32 rounded-t-lg"></div>
+                    <button class="py-4 text-gray-300 font-semibold">#FFFFFF</button>
+                </div>
+                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between animate-pulse">
+                    <div class="bg-gray-300 w-full h-32 rounded-t-lg"></div>
+                    <button class="py-4 text-gray-300 font-semibold">#FFFFFF</button>
+                </div>
+                <div class="h-48 w-32 shadow-md shadow-slate-500/50 flex flex-col rounded-lg justify-between animate-pulse">
+                    <div class="bg-gray-300 w-full h-32 rounded-t-lg"></div>
+                    <button class="py-4 text-gray-300 font-semibold">#FFFFFF</button>
                 </div>
 
             </div>

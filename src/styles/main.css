@@ -18,6 +18,9 @@
     padding-bottom: 1rem;
     width: 100%;
 }
+.span-cols{
+    grid-column: 1 / -1;
+}
 @media (min-width: 1280px){
     .color__list{
         flex-direction: row;
