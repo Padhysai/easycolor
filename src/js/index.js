@@ -5,9 +5,11 @@ import {
   handleMarkFavourite,
   handleOnSearchInputChange,
   renderColorComponent,
+  renderCommunityColors,
   renderFavourites,
   renderPrimaryColors,
   renderSecondaryColors,
+  handleOnCopyClick,
 } from "./utils";
 import { initPicker } from "./vendor";
 
@@ -45,4 +47,11 @@ import { initPicker } from "./vendor";
   // Loading Secondary Colors Skeleton -- colors with
   renderSecondaryColors();
   // Loading Community colors skeleton -- colors with scroll
+  renderCommunityColors();
+  //Attaching copy event listners
+  document.getElementById("colorList").onclick = handleOnCopyClick;
+  document.getElementById("favourite-colors").onclick = handleOnCopyClick;
+  document.getElementById("primary-colors").onclick = handleOnCopyClick;
+  document.getElementById("secondary-colors").onclick = handleOnCopyClick;
+  document.getElementById("community-colors").onclick = handleOnCopyClick;
 })();

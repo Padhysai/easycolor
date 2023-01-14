@@ -1,11 +1,10 @@
 {
-  "name": "easycolor",
+  "name": "easycolors",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "The Ultimate Color Code Tool - One-Click Copying and Custom Color Selection",
   "scripts": {
     "dev": "npx parcel src/index.html --open",
-    "build": "npx parcel build src/index.html"
+    "build": "parcel build src/index.html"
   },
   "keywords": [],
   "author": "",

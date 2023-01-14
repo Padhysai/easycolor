@@ -107,3 +107,11 @@ export const PRIMARY_COLORS = [
   "#027A48",
   "#05603A",
 ];
+
+export const COMMUNITY = [
+  {
+    color: "#FE784F",
+    submittedby: "Sai Prasad Padhy",
+    userprofile: "https://github.com/Padhysai",
+  },
+];

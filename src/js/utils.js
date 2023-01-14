@@ -1,5 +1,5 @@
 import chroma from "chroma-js";
-import { PRIMARY_COLORS, SECONDARY_COLORS } from "../data/data";
+import { COMMUNITY, PRIMARY_COLORS, SECONDARY_COLORS } from "../data/data";
 import { LS_FAVOURITES_KEY } from "./constants";
 import {
   getColorName,
@@ -89,11 +89,15 @@ export const convertToHex = async (colorVal) => {
 };
 
 export const handleOnSearchInputChange = async (e) => {
-  const isValidColor = await chroma.valid(e.target.value);
-  if (isValidColor) {
-    const hexColor = await chroma(e.target.value).hex();
-    await assignRandomColor(hexColor);
-    await renderColorComponent(hexColor);
+  try {
+    const isValidColor = await chroma.valid(e.target.value);
+    if (isValidColor) {
+      const hexColor = await chroma(e.target.value).hex();
+      await assignRandomColor(hexColor);
+      await renderColorComponent(hexColor);
+    }
+  } catch {
+    showToast("error", "Something went wrong!");
   }
 };
 
@@ -130,50 +134,131 @@ export const renderFavouriteCard = (color) => {
   return mainDiv;
 };
 
-export const renderFavourites = async () => {
-  const favColorsDiv = document.getElementById("favourite-colors");
-  const favItems = await getItems(LS_FAVOURITES_KEY);
+export const renderCommunityCard = (colorObj) => {
+  const mainDiv = createElement(
+    "div",
+    [
+      "h-48",
+      "w-64",
+      "shadow-md",
+      "shadow-slate-500/50",
+      "flex",
+      "flex-col",
+      "rounded-lg",
+      "justify-between",
+    ],
+    null,
+    null
+  );
+  const nestedDiv = createElement(
+    "div",
+    ["w-full", "h-32", "rounded-t-lg"],
+    null,
+    null
+  );
+  nestedDiv.style.backgroundColor = colorObj.color;
+  const btn = createElement(
+    "button",
+    ["pt-4", "text-black700", "font-semibold"],
+    colorObj.color,
+    colorObj.color
+  );
+  const a = document.createElement("a");
+  a.href = colorObj.userprofile;
+  a.textContent = `Submitted by ${colorObj.submittedby}`;
+  a.target = "_blank";
+
+  const att = createElement(
+    "p",
+    ["text-sm", "text-center", "pb-1", "pt-1"],
+    null,
+    null
+  );
+
+  att.append(a);
+  mainDiv.append(nestedDiv, btn, att);
+  return mainDiv;
+};
+
+export const renderColorsinUI = (ele, arr, img = null) => {
   const fragment = document.createDocumentFragment();
-  if (favItems.length === 0) {
-    const img = document.getElementById("no-fav-img");
+  if (arr.length === 0) {
+    //const img = document.getElementById("no-fav-img");
     img.classList.remove("hidden");
     fragment.append(img);
   }
-  favItems.forEach((color) => {
+  arr.forEach((color) => {
     const cardDiv = renderFavouriteCard(color);
     fragment.append(cardDiv);
   });
-  favColorsDiv.innerHTML = "";
-  favColorsDiv.append(fragment);
+  ele.innerHTML = "";
+  ele.append(fragment);
+};
+
+export const renderFavourites = async () => {
+  const favColorsDiv = document.getElementById("favourite-colors");
+  const favItems = await getItems(LS_FAVOURITES_KEY);
+  const img = document.getElementById("no-fav-img");
+  renderColorsinUI(favColorsDiv, favItems, img);
 };
 
 export const renderPrimaryColors = async () => {
   const primaryColorsDiv = document.getElementById("primary-colors");
-  const fragment = document.createDocumentFragment();
-  PRIMARY_COLORS.forEach((color) => {
-    const cardDiv = renderFavouriteCard(color);
-    fragment.append(cardDiv);
-  });
-  primaryColorsDiv.innerHTML = "";
-  primaryColorsDiv.append(fragment);
+  renderColorsinUI(primaryColorsDiv, PRIMARY_COLORS);
 };
 
 export const renderSecondaryColors = async () => {
-  const primaryColorsDiv = document.getElementById("secondary-colors");
+  const secondaryColorsDiv = document.getElementById("secondary-colors");
+  renderColorsinUI(secondaryColorsDiv, SECONDARY_COLORS);
+};
+
+export const renderCommunityColors = async () => {
+  const communityColorsDiv = document.getElementById("community-colors");
   const fragment = document.createDocumentFragment();
-  SECONDARY_COLORS.forEach((color) => {
-    const cardDiv = renderFavouriteCard(color);
+  COMMUNITY.forEach((color) => {
+    const cardDiv = renderCommunityCard(color);
     fragment.append(cardDiv);
   });
-  primaryColorsDiv.innerHTML = "";
-  primaryColorsDiv.append(fragment);
+  communityColorsDiv.innerHTML = "";
+  communityColorsDiv.append(fragment);
 };
 
 export const handleMarkFavourite = async (e) => {
-  const colorHex = document.getElementById("colorHEX");
-  await addItem(LS_FAVOURITES_KEY, colorHex.textContent);
-  showToast("success", "Color marked as a favorite!");
-  renderFavourites();
+  try {
+    const colorHex = document.getElementById("colorHEX");
+    await addItem(LS_FAVOURITES_KEY, colorHex.textContent);
+    showToast("success", "Color marked as a favorite!");
+    renderFavourites();
+  } catch {
+    showToast("error", "Something went wrong!");
+  }
+};
+
+export const handleOnCopyClick = async (e) => {
+  try {
+    const copiedColor = e.target.getAttribute("data-color");
+    const permssion = await navigator.permissions.query({
+      name: "clipboard-write",
+    });
+    if (copiedColor && permssion.state === "granted") {
+      navigator.clipboard.writeText(copiedColor);
+      //Show Toast
+      showToast("success", "Color copied to clipboard!");
+    } else if (permssion.state === "denied") {
+      const request = await navigator.permissions.request({
+        name: "clipboard-write",
+      });
+      if (request.state === "granted") {
+        navigator.clipboard.writeText(copiedColor);
+        //Show Toast
+        showToast("success", "Color copied to clipboard!");
+      } else {
+        showToast("warning", "You don't have permissions enabled!");
+      }
+    }
+  } catch {
+    showToast("error", "Something went wrong!");
+  }
 };
 
 export const debounce = (fn, delay = 500) => {
