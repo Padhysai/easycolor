@@ -4,7 +4,7 @@
   "description": "The Ultimate Color Code Tool - One-Click Copying and Custom Color Selection",
   "scripts": {
     "dev": "npx parcel src/index.html --open",
-    "build": "parcel build src/index.html"
+    "build": "parcel build src/index.html --no-source-maps"
   },
   "keywords": [],
   "author": "",
